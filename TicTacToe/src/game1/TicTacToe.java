@@ -18,7 +18,7 @@ public class TicTacToe {
 		printBoard();
 		
 		while(gameStarted) {
-			System.out.println("Enter your move rows[1-3] & columns[1-3]");
+			System.out.println("Player " + currentPlayer + " Enter your move rows[1-3] & columns[1-3]");
 			int rows = sc.nextInt() - 1;
 			int cols = sc.nextInt() - 1;
 			
@@ -34,7 +34,7 @@ public class TicTacToe {
 				}
 				
 				else if (isDraw()) {
-					System.out.println("Nobody is winner.. Play again");
+					System.out.println("It's a Draw.. Nobody is a winner.. Play again");
 					gameStarted = false;
 				}else {
 					currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
@@ -48,15 +48,15 @@ public class TicTacToe {
 	
 	//For printing the board when players take turns
 	public static void printBoard() {
-		System.out.println(" ----------");
-		for(int i = 0; i <= 2; i++) {
-//			System.out.println("| ");
-			for(int j = 0; j <= 2; j++){
-			    System.out.print(board[i][j]+" | ");
-			}
-			System.out.println();
-			System.out.println(" ----------");
-		}
+        System.out.println("-------------");
+        for (int i = 0; i < 3; i++) {
+            System.out.print("| ");
+            for (int j = 0; j < 3; j++) {
+                System.out.print(board[i][j] + " | ");
+            }
+            System.out.println();
+            System.out.println("-------------");
+        }
 	}
 	
 	//Winning cases for a player
@@ -76,12 +76,13 @@ public class TicTacToe {
         return false;
 	}
 	
+	//When all rows and columns are filled then its a draw
 	public static boolean isDraw() {
 		for(int i = 0 ; i <= 2  ; i++) 
 			for(int j = 0 ; j <= 2 ; j++) 
 				if(board[i][j] == (' ')) {
-					return true;
+					return false;
 				}
-		return false;		
+		return true;		
 	}
 }
