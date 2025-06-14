@@ -17,6 +17,32 @@ public class TicTacToe {
 		System.out.println("Welcome to tic tac toe!");
 		printBoard();
 		
+		while(gameStarted) {
+			System.out.println("Enter your move rows[1-3] & columns[1-3]");
+			int rows = sc.nextInt() - 1;
+			int cols = sc.nextInt() - 1;
+			
+			if(board[rows][cols] != ' ' || rows > 2 || cols > 2 || rows < 0 || cols < 0) {
+				System.out.println("Invalid Move.. Try Again");
+			}else {
+				board[rows][cols] = currentPlayer;
+				printBoard();
+				
+				if (hasWon(currentPlayer)) {
+					System.out.println("Player "+ currentPlayer + " is the winner");
+					gameStarted = false;
+				}
+				
+				else if (isDraw()) {
+					System.out.println("Nobody is winner.. Play again");
+					gameStarted = false;
+				}else {
+					currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+				}
+			}
+					
+		}
+		
 		
 	}
 	
@@ -24,8 +50,9 @@ public class TicTacToe {
 	public static void printBoard() {
 		System.out.println(" ----------");
 		for(int i = 0; i <= 2; i++) {
-			for(int j = 0; j <= 3; j++){
-			    System.out.print(" | ");
+//			System.out.println("| ");
+			for(int j = 0; j <= 2; j++){
+			    System.out.print(board[i][j]+" | ");
 			}
 			System.out.println();
 			System.out.println(" ----------");
@@ -49,5 +76,12 @@ public class TicTacToe {
         return false;
 	}
 	
-	
+	public static boolean isDraw() {
+		for(int i = 0 ; i <= 2  ; i++) 
+			for(int j = 0 ; j <= 2 ; j++) 
+				if(board[i][j] == (' ')) {
+					return true;
+				}
+		return false;		
+	}
 }
